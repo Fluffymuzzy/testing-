@@ -1,21 +1,22 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString,  } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString, Matches } from "class-validator";
 
 export class CreateAuthorDto {
-    
-    @IsString()
-    @IsNotEmpty()
-    name: string;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-    @IsString()
-    @IsNotEmpty()
-    surname: string;
+  @IsString()
+  @IsNotEmpty()
+  surname: string;
 
-    @IsEmail()
-    @IsNotEmpty()
-    email: string;
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
 
-    @IsString()
-    @IsOptional()
-    phoneNumber?: string;
-
+  @IsString()
+  @IsNotEmpty()
+  @Matches(/^\+[1-9]\d{1,14}$/, {
+    message: "phoneNum must be a valid international phone number",
+  })
+  phoneNumber: string;
 }
