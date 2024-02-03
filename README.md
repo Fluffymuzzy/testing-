@@ -30,6 +30,7 @@ npx prisma migrate dev --name init
 ```
 ## Important
 An error may occur
+
 If you're using `windows`, add:
 ```
 generator client {
@@ -37,7 +38,9 @@ generator client {
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 ```
+
 to `schema.prisma.ts` file
+
 If you're using `MAC`, add:
 ```
 generator client {
