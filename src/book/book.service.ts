@@ -3,6 +3,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { CreateBookDto } from "./dto/createBookDto";
 import { UpdateBookDto } from "./dto/updateBookDto";
 import { FindBooksDto } from "./dto/findBooks.dto";
+import { Prisma } from "@prisma/client";
 
 @Injectable()
 export class BookService {
@@ -15,24 +16,35 @@ export class BookService {
   }
   // -------------------------------------------------------------
   async findAll(findBooksDto: FindBooksDto) {
-    const { name, names, authorName, authorNames } = findBooksDto;
+    const {
+      name,
+      names,
+      authorName,
+      authorNames,
+      content,
+      contents,
+      skip,
+      take,
+    } = findBooksDto;
+  
     const conditions = [];
-
+  
     const addCondition = (field: string, value: string | string[]) => {
-      if (field === "author.surname") {
+      if (field.startsWith("author.")) {
+        const fieldName = field.split(".")[1];
         if (Array.isArray(value)) {
           conditions.push({
             author: {
-              surname: {
+              [fieldName]: {
                 in: value,
                 mode: "insensitive",
               },
             },
           });
-        } else {
+        } else if (value) {
           conditions.push({
             author: {
-              surname: {
+              [fieldName]: {
                 contains: value,
                 mode: "insensitive",
               },
@@ -47,7 +59,7 @@ export class BookService {
               mode: "insensitive",
             },
           });
-        } else {
+        } else if (value) {
           conditions.push({
             [field]: {
               contains: value,
@@ -57,16 +69,27 @@ export class BookService {
         }
       }
     };
-
-    addCondition("name", name ?? names);
-    addCondition("author.surname", authorName ?? authorNames);
-
+  
+    if (name || names) addCondition("name", name ?? names);
+    if (authorName || authorNames) addCondition("author.surname", authorName ?? authorNames);
+    if (content || contents) addCondition("content", content ?? contents);
+  
     const whereCondition = conditions.length > 0 ? { AND: conditions } : {};
-
-    return await this.prisma.book.findMany({
+  
+    const params: {
+      where: Prisma.BookWhereInput;
+      include: Prisma.BookInclude;
+      skip?: number;
+      take?: number;
+    } = {
       where: whereCondition,
       include: { author: true },
-    });
+    };
+  
+    if (skip !== undefined) params.skip = Number(skip);
+    if (take !== undefined) params.take = Number(take);
+  
+    return await this.prisma.book.findMany(params);
   }
 
   // -------------------------------------------------------------

@@ -3,6 +3,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { CreateAuthorDto } from "./dto/createAuthorDto";
 import { UpdateAuthorDto } from "./dto/updateAuthorDto";
 import { FindAuthorsDto } from "./dto/findAuthors.dto";
+import { Prisma } from "@prisma/client";
 
 @Injectable()
 export class AuthorService {
@@ -24,13 +25,16 @@ export class AuthorService {
       emails,
       phoneNumber,
       phoneNumbers,
+      skip,
+      take,
     } = findAuthorDto;
+
     const conditions = [];
 
     const addCondition = (
       field: string,
       value: string | string[],
-      mode: "OR" | "AND"
+      mode: "OR" | "AND" = "OR"
     ) => {
       if (Array.isArray(value) && value.length > 0) {
         conditions.push({
@@ -51,18 +55,28 @@ export class AuthorService {
       }
     };
 
-    addCondition("name", name ?? names, "OR");
-    addCondition("surname", surname ?? surnames, "OR");
-    addCondition("email", email ?? emails, "OR");
-    addCondition("phoneNumber", phoneNumber ?? phoneNumbers, "OR");
+    if (name || names) addCondition("name", name ?? names);
+    if (surname || surnames) addCondition("surname", surname ?? surnames);
+    if (email || emails) addCondition("email", email ?? emails);
+    if (phoneNumber || phoneNumbers)
+      addCondition("phoneNumber", phoneNumber ?? phoneNumbers);
 
-    const whereCondition =
-      conditions.length > 1 ? { AND: conditions } : conditions[0] || {};
+    const whereCondition = conditions.length > 0 ? { AND: conditions } : {};
 
-    return await this.prisma.author.findMany({
+    const params: {
+      where: Prisma.AuthorWhereInput;
+      include: Prisma.AuthorInclude;
+      skip?: number;
+      take?: number;
+    } = {
       where: whereCondition,
       include: { books: true },
-    });
+    };
+
+    if (skip !== undefined) params.skip = Number(skip);
+    if (take !== undefined) params.take = Number(take);
+
+    return await this.prisma.author.findMany(params);
   }
   // -------------------------------------------------------------
   async update(id: string, updateAuthorDto: UpdateAuthorDto) {

@@ -1,4 +1,5 @@
-import { IsEmail, IsOptional, IsString, IsArray } from "class-validator";
+import { Type } from "class-transformer";
+import { IsEmail, IsOptional, IsString, IsArray, IsInt, Min } from "class-validator";
 
 export class FindAuthorsDto {
   @IsOptional()
@@ -35,4 +36,16 @@ export class FindAuthorsDto {
   @IsArray()
   @IsString({ each: true })
   phoneNumbers?: string[];
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(0)
+  skip?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  take?: number;
 }
