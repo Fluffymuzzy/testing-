@@ -1,97 +1,605 @@
-# TESTING
-## Installation
-Cloning a repository
-```bash
-git clone https://github.com/Fluffymuzzy/testing-
-```
-Go to the project folder
-```sh
-cd testing-
-```
-Run
-```sh
-npm i
-```
-Use Docker Compose to build and run containers
-```sh
-docker-compose up --build
-```
-The --build flag ensures that the images will be rebuilt. If you want to run containers in the background, add -d
-```sh
-docker-compose up --build -d
-```
-Run 
-```sh
-npx prisma generate
-```
-After
-```sh
-npx prisma migrate dev --name init
-```
-## Important
-An error may occur
+<!-- SWAGGER-DOC-START -->
+---
+title: App example v1.0
+language_tabs:
+  - http: HTTP
+  - javascript: JavaScript
+language_clients: []
+toc_footers: []
+includes: []
+search: true
+highlight_theme: darkula
+headingLevel: 2
 
-If you're using `windows`, add:
+---
+
+<!-- Generator: Widdershins v4.0.1 -->
+
+<h1 id="app-example">App example v1.0</h1>
+
+> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+
+The app's API description
+
+Base URLs:
+
+<h1 id="app-example-app">app</h1>
+
+## AuthorController_create
+
+<a id="opIdAuthorController_create"></a>
+
+> Code samples
+
+```http
+POST /author HTTP/1.1
+
+Content-Type: application/json
+
 ```
-generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native", "debian-openssl-3.0.x"]
+
+```javascript
+const inputBody = '{
+  "name": "John",
+  "surname": "Doe",
+  "email": "doe@example.com",
+  "phoneNumber": "+1234567890"
+}';
+const headers = {
+  'Content-Type':'application/json'
+};
+
+fetch('/author',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`POST /author`
+
+*Create an author*
+
+> Body parameter
+
+```json
+{
+  "name": "John",
+  "surname": "Doe",
+  "email": "doe@example.com",
+  "phoneNumber": "+1234567890"
 }
 ```
 
-to `schema.prisma.ts` file
+<h3 id="authorcontroller_create-parameters">Parameters</h3>
 
-If you're using `MAC`, add:
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[CreateAuthorDto](#schemacreateauthordto)|true|none|
+
+<h3 id="authorcontroller_create-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|The author has been successfully created|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## AuthorController_findAll
+
+<a id="opIdAuthorController_findAll"></a>
+
+> Code samples
+
+```http
+GET /author HTTP/1.1
+
 ```
-generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native", "debian-openssl-3.0.x", "linux-arm64-openssl-3.0.x"]
+
+```javascript
+
+fetch('/author',
+{
+  method: 'GET'
+
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`GET /author`
+
+*Find all authors or by using a filter*
+
+<h3 id="authorcontroller_findall-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|name|query|string|false|Search by author name|
+|names|query|array[string]|false|Search by authors names|
+|surname|query|string|false|Search by author surname|
+|surnames|query|array[string]|false|Search by authors surnames|
+|email|query|string|false|Search by author email|
+|emails|query|array[string]|false|Search by authors emails|
+|phoneNumber|query|string|false|Search by phone number|
+|phoneNumbers|query|array[string]|false|Search by phone numbers|
+|skip|query|number|false|Number of records to skip for pagination|
+|take|query|number|false|Limit the number of records returned|
+
+<h3 id="authorcontroller_findall-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Return authors|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## AuthorController_update
+
+<a id="opIdAuthorController_update"></a>
+
+> Code samples
+
+```http
+PATCH /author/{id} HTTP/1.1
+
+Content-Type: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "name": "John",
+  "surname": "Doe",
+  "email": "doe@example.com",
+  "phoneNumber": "+1234567890"
+}';
+const headers = {
+  'Content-Type':'application/json'
+};
+
+fetch('/author/{id}',
+{
+  method: 'PATCH',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`PATCH /author/{id}`
+
+*Update an author*
+
+> Body parameter
+
+```json
+{
+  "name": "John",
+  "surname": "Doe",
+  "email": "doe@example.com",
+  "phoneNumber": "+1234567890"
 }
 ```
-And rebuild project: 
-```sh
-docker-compose up --build -d
+
+<h3 id="authorcontroller_update-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|Author ID|
+|body|body|[UpdateAuthorDto](#schemaupdateauthordto)|true|none|
+
+<h3 id="authorcontroller_update-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The author has been successfully updated|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## AuthorController_remove
+
+<a id="opIdAuthorController_remove"></a>
+
+> Code samples
+
+```http
+DELETE /author/{id} HTTP/1.1
+
 ```
-To populate the database with the initial data, run the following command:
-```sh
-docker-compose exec app npm run seed
+
+```javascript
+
+fetch('/author/{id}',
+{
+  method: 'DELETE'
+
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
 ```
-### Pagination
-To test pagination, add the `skip` and `take` parameters to the request URL:
 
-- `skip` specifies the number of records to skip from the beginning of the list.
-- `take` specifies the maximum number of records to return in the response.
+`DELETE /author/{id}`
 
-Example URL to retrieve books with pagination:
+*Delete an author*
 
-http://localhost:3000/book?skip=0&take=5
+<h3 id="authorcontroller_remove-parameters">Parameters</h3>
 
-Example URL to retrieve authors with pagination:
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|Author ID|
 
-http://localhost:3000/author?skip=0&take=5
+<h3 id="authorcontroller_remove-responses">Responses</h3>
 
-You can also combine pagination and filtering in one query:
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The author has been successfully deleted|None|
 
-http://localhost:3000/book?content=A novel&skip=0&take=2
+<aside class="success">
+This operation does not require authentication
+</aside>
 
-### Filters
-To filter books or authors by specific fields, add filtering parameters to the request URL. You can filter by `name`, `content`, and `authorName`.
+## BookController_create
 
-Example URL to filter a books by content:
+<a id="opIdBookController_create"></a>
 
-http://localhost:3000/book?content=A novel
+> Code samples
 
-OR
+```http
+POST /book HTTP/1.1
 
-http://localhost:3000/book?contents[]=A novel&contents[]=A high-fantasy epic
+Content-Type: application/json
 
-To filter by author name:
+```
 
-http://localhost:3000/author?name=John
+```javascript
+const inputBody = '{
+  "name": "A Modern Utopia",
+  "content": "A novel",
+  "authorId": "123e4567-e89b-12d3-a456-426614174000"
+}';
+const headers = {
+  'Content-Type':'application/json'
+};
 
-OR
+fetch('/book',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
-http://localhost:3000/author?names[]=John&names[]=Mark
+```
 
-You can filter the author by `name`, `surname`, `phoneNumber`, `email` or array of fields. You can also add pagination to the query, following the example above, as with books.
+`POST /book`
 
+*Create a new book*
+
+> Body parameter
+
+```json
+{
+  "name": "A Modern Utopia",
+  "content": "A novel",
+  "authorId": "123e4567-e89b-12d3-a456-426614174000"
+}
+```
+
+<h3 id="bookcontroller_create-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[CreateBookDto](#schemacreatebookdto)|true|none|
+
+<h3 id="bookcontroller_create-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|The book has been successfully created|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## BookController_findAll
+
+<a id="opIdBookController_findAll"></a>
+
+> Code samples
+
+```http
+GET /book HTTP/1.1
+
+```
+
+```javascript
+
+fetch('/book',
+{
+  method: 'GET'
+
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`GET /book`
+
+*Finds all books or by using a filter*
+
+<h3 id="bookcontroller_findall-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|name|query|string|false|Search by title|
+|names|query|array[string]|false|Search by titles|
+|authorName|query|string|false|Search by author surname|
+|authorNames|query|array[string]|false|Search by authors surnames|
+|content|query|string|false|Search by book genre|
+|contents|query|array[string]|false|Search by book genres|
+|skip|query|number|false|Number of records to skip for pagination|
+|take|query|number|false|Limit the number of records returned|
+
+<h3 id="bookcontroller_findall-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Return books|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## BookController_update
+
+<a id="opIdBookController_update"></a>
+
+> Code samples
+
+```http
+PATCH /book/{id} HTTP/1.1
+
+Content-Type: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "name": "The Hobbit",
+  "content": "A novel",
+  "authorId": "123e4567-e89b-12d3-a456-426614174000"
+}';
+const headers = {
+  'Content-Type':'application/json'
+};
+
+fetch('/book/{id}',
+{
+  method: 'PATCH',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`PATCH /book/{id}`
+
+*Update a book*
+
+> Body parameter
+
+```json
+{
+  "name": "The Hobbit",
+  "content": "A novel",
+  "authorId": "123e4567-e89b-12d3-a456-426614174000"
+}
+```
+
+<h3 id="bookcontroller_update-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|Book ID|
+|body|body|[UpdateBookDto](#schemaupdatebookdto)|true|none|
+
+<h3 id="bookcontroller_update-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The book has been succesfully updated|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## BookController_remove
+
+<a id="opIdBookController_remove"></a>
+
+> Code samples
+
+```http
+DELETE /book/{id} HTTP/1.1
+
+```
+
+```javascript
+
+fetch('/book/{id}',
+{
+  method: 'DELETE'
+
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`DELETE /book/{id}`
+
+*Delete a book*
+
+<h3 id="bookcontroller_remove-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|Book ID|
+
+<h3 id="bookcontroller_remove-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|The book has been successfully deleted.|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+# Schemas
+
+<h2 id="tocS_CreateAuthorDto">CreateAuthorDto</h2>
+<!-- backwards compatibility -->
+<a id="schemacreateauthordto"></a>
+<a id="schema_CreateAuthorDto"></a>
+<a id="tocScreateauthordto"></a>
+<a id="tocscreateauthordto"></a>
+
+```json
+{
+  "name": "John",
+  "surname": "Doe",
+  "email": "doe@example.com",
+  "phoneNumber": "+1234567890"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|name|string|true|none|Author's name|
+|surname|string|true|none|Author's surname|
+|email|string|true|none|Author's email|
+|phoneNumber|string|true|none|Author's phone number|
+
+<h2 id="tocS_UpdateAuthorDto">UpdateAuthorDto</h2>
+<!-- backwards compatibility -->
+<a id="schemaupdateauthordto"></a>
+<a id="schema_UpdateAuthorDto"></a>
+<a id="tocSupdateauthordto"></a>
+<a id="tocsupdateauthordto"></a>
+
+```json
+{
+  "name": "John",
+  "surname": "Doe",
+  "email": "doe@example.com",
+  "phoneNumber": "+1234567890"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|name|string|false|none|Author's name|
+|surname|string|false|none|Author's surname|
+|email|string|false|none|Author's email|
+|phoneNumber|string|false|none|Author's phone number|
+
+<h2 id="tocS_CreateBookDto">CreateBookDto</h2>
+<!-- backwards compatibility -->
+<a id="schemacreatebookdto"></a>
+<a id="schema_CreateBookDto"></a>
+<a id="tocScreatebookdto"></a>
+<a id="tocscreatebookdto"></a>
+
+```json
+{
+  "name": "A Modern Utopia",
+  "content": "A novel",
+  "authorId": "123e4567-e89b-12d3-a456-426614174000"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|name|string|true|none|Title of the book|
+|content|string|true|none|Content of the book|
+|authorId|string|true|none|Author ID|
+
+<h2 id="tocS_UpdateBookDto">UpdateBookDto</h2>
+<!-- backwards compatibility -->
+<a id="schemaupdatebookdto"></a>
+<a id="schema_UpdateBookDto"></a>
+<a id="tocSupdatebookdto"></a>
+<a id="tocsupdatebookdto"></a>
+
+```json
+{
+  "name": "The Hobbit",
+  "content": "A novel",
+  "authorId": "123e4567-e89b-12d3-a456-426614174000"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|name|string|false|none|Title of the book|
+|content|string|false|none|Description of the book|
+|authorId|string|false|none|Description of the book|
+
+
+<!-- SWAGGER-DOC-END -->
