@@ -2,9 +2,9 @@
 ---
 title: App example v1.0
 language_tabs:
+  - shell: Shell
   - http: HTTP
   - javascript: JavaScript
-language_clients: []
 toc_footers: []
 includes: []
 search: true
@@ -30,6 +30,13 @@ Base URLs:
 <a id="opIdAuthorController_create"></a>
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X POST /author \
+  -H 'Content-Type: application/json'
+
+```
 
 ```http
 POST /author HTTP/1.1
@@ -100,6 +107,12 @@ This operation does not require authentication
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X GET /author
+
+```
+
 ```http
 GET /author HTTP/1.1
 
@@ -154,6 +167,13 @@ This operation does not require authentication
 <a id="opIdAuthorController_update"></a>
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X PATCH /author/{id} \
+  -H 'Content-Type: application/json'
+
+```
 
 ```http
 PATCH /author/{id} HTTP/1.1
@@ -225,6 +245,12 @@ This operation does not require authentication
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X DELETE /author/{id}
+
+```
+
 ```http
 DELETE /author/{id} HTTP/1.1
 
@@ -270,6 +296,13 @@ This operation does not require authentication
 <a id="opIdBookController_create"></a>
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X POST /book \
+  -H 'Content-Type: application/json'
+
+```
 
 ```http
 POST /book HTTP/1.1
@@ -338,6 +371,12 @@ This operation does not require authentication
 
 > Code samples
 
+```shell
+# You can also use wget
+curl -X GET /book
+
+```
+
 ```http
 GET /book HTTP/1.1
 
@@ -390,6 +429,13 @@ This operation does not require authentication
 <a id="opIdBookController_update"></a>
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X PATCH /book/{id} \
+  -H 'Content-Type: application/json'
+
+```
 
 ```http
 PATCH /book/{id} HTTP/1.1
@@ -458,6 +504,12 @@ This operation does not require authentication
 <a id="opIdBookController_remove"></a>
 
 > Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE /book/{id}
+
+```
 
 ```http
 DELETE /book/{id} HTTP/1.1
