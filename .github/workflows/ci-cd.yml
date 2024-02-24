@@ -30,13 +30,16 @@ jobs:
       - name: Generate Swagger Markdown and update README.md
         run: npm run generate-swagger-md    
       
-      - name: Commit README changes
+     - name: Commit README changes
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git add README.md
           git commit -m "Update README with Swagger documentation" -a || echo "No changes to commit"
-          git push    
+          git push --set-upstream origin HEAD:main || echo "No changes to push"
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+
 
       - name: Build Docker image
         run: docker build -t fluffymuzzy1/testing .
