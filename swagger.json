@@ -1,0 +1,541 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/author": {
+      "post": {
+        "operationId": "AuthorController_create",
+        "summary": "Create an author",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAuthorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The author has been successfully created"
+          }
+        },
+        "tags": [
+          "app"
+        ]
+      },
+      "get": {
+        "operationId": "AuthorController_findAll",
+        "summary": "Find all authors or by using a filter",
+        "parameters": [
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "description": "Search by author name",
+            "example": "John",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "names",
+            "required": false,
+            "in": "query",
+            "description": "Search by authors names",
+            "example": [
+              "John",
+              "Oscar"
+            ],
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "surname",
+            "required": false,
+            "in": "query",
+            "description": "Search by author surname",
+            "example": "Tolkien",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "surnames",
+            "required": false,
+            "in": "query",
+            "description": "Search by authors surnames",
+            "example": [
+              "Tolkien",
+              "Wilde"
+            ],
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "email",
+            "required": false,
+            "in": "query",
+            "description": "Search by author email",
+            "example": "tolkien@example.com",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "emails",
+            "required": false,
+            "in": "query",
+            "description": "Search by authors emails",
+            "example": [
+              "tolkien@example.com",
+              "wilde@example.com"
+            ],
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "phoneNumber",
+            "required": false,
+            "in": "query",
+            "description": "Search by phone number",
+            "example": "+1234555770",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phoneNumbers",
+            "required": false,
+            "in": "query",
+            "description": "Search by phone numbers",
+            "example": [
+              "+1234555770",
+              "+1234555780"
+            ],
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "description": "Number of records to skip for pagination",
+            "example": 0,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "description": "Limit the number of records returned",
+            "example": 10,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return authors"
+          }
+        },
+        "tags": [
+          "app"
+        ]
+      }
+    },
+    "/author/{id}": {
+      "patch": {
+        "operationId": "AuthorController_update",
+        "summary": "Update an author",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Author ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAuthorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The author has been successfully updated"
+          }
+        },
+        "tags": [
+          "app"
+        ]
+      },
+      "delete": {
+        "operationId": "AuthorController_remove",
+        "summary": "Delete an author",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Author ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The author has been successfully deleted"
+          }
+        },
+        "tags": [
+          "app"
+        ]
+      }
+    },
+    "/book": {
+      "post": {
+        "operationId": "BookController_create",
+        "summary": "Create a new book",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The book has been successfully created"
+          }
+        },
+        "tags": [
+          "app"
+        ]
+      },
+      "get": {
+        "operationId": "BookController_findAll",
+        "summary": "Finds all books or by using a filter",
+        "parameters": [
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "description": "Search by title",
+            "example": "A Modern Utopia",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "names",
+            "required": false,
+            "in": "query",
+            "description": "Search by titles",
+            "example": [
+              "A Modern Utopia",
+              "War and Peace"
+            ],
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "authorName",
+            "required": false,
+            "in": "query",
+            "description": "Search by author surname",
+            "example": "Tolkien",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorNames",
+            "required": false,
+            "in": "query",
+            "description": "Search by authors surnames",
+            "example": [
+              "Tolkien",
+              "Wilde"
+            ],
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "content",
+            "required": false,
+            "in": "query",
+            "description": "Search by book genre",
+            "example": "A novel",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contents",
+            "required": false,
+            "in": "query",
+            "description": "Search by book genres",
+            "example": [
+              "A novel",
+              "Epic"
+            ],
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "description": "Number of records to skip for pagination",
+            "example": 0,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "description": "Limit the number of records returned",
+            "example": 10,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return books"
+          }
+        },
+        "tags": [
+          "app"
+        ]
+      }
+    },
+    "/book/{id}": {
+      "patch": {
+        "operationId": "BookController_update",
+        "summary": "Update a book",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Book ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The book has been succesfully updated"
+          }
+        },
+        "tags": [
+          "app"
+        ]
+      },
+      "delete": {
+        "operationId": "BookController_remove",
+        "summary": "Delete a book",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Book ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The book has been successfully deleted."
+          }
+        },
+        "tags": [
+          "app"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "App example",
+    "description": "The app's API description",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "app",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateAuthorDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Author's name",
+            "example": "John"
+          },
+          "surname": {
+            "type": "string",
+            "description": "Author's surname",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "Author's email",
+            "example": "doe@example.com"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Author's phone number",
+            "example": "+1234567890",
+            "pattern": "^+[1-9]d{1,14}$"
+          }
+        },
+        "required": [
+          "name",
+          "surname",
+          "email",
+          "phoneNumber"
+        ]
+      },
+      "UpdateAuthorDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Author's name",
+            "example": "John"
+          },
+          "surname": {
+            "type": "string",
+            "description": "Author's surname",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "Author's email",
+            "example": "doe@example.com"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Author's phone number",
+            "example": "+1234567890",
+            "pattern": "^+[1-9]d{1,14}$"
+          }
+        }
+      },
+      "CreateBookDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Title of the book",
+            "example": "A Modern Utopia"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content of the book",
+            "example": "A novel"
+          },
+          "authorId": {
+            "type": "string",
+            "description": "Author ID",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          }
+        },
+        "required": [
+          "name",
+          "content",
+          "authorId"
+        ]
+      },
+      "UpdateBookDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Title of the book",
+            "example": "The Hobbit"
+          },
+          "content": {
+            "type": "string",
+            "description": "Description of the book",
+            "example": "A novel"
+          },
+          "authorId": {
+            "type": "string",
+            "description": "Description of the book",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          }
+        }
+      }
+    }
+  }
+}
