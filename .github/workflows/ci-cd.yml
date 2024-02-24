@@ -4,7 +4,8 @@ on:
   push: 
     branches: [main]
   pull_request:
-    branches: [main]  
+    branches: [main]
+
 jobs: 
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -13,10 +14,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Node.js
-      - uses: actions/setup-node@v4
+        uses: actions/setup-node@v4
         with: 
           node-version: 'node'
-           
+          
       - name: Install dependencies
         run: npm ci
       
@@ -40,9 +41,6 @@ jobs:
       - name: Build Docker image
         run: docker build -t fluffymuzzy1/testing .
 
-      - name: Build Docker image
-        run: docker build -t fluffymuzzy1/testing .
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -50,4 +48,4 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Push Docker image
-        run: docker push fluffymuzzy1/testing:latest  
+        run: docker push fluffymuzzy1/testing:latest
